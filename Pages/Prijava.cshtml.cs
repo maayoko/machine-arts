@@ -28,10 +28,9 @@ namespace Machine_arts.Pages
 
         public async Task<IActionResult> OnPostLoginAsync()
         {
-    
 
             try {
-                var user = _context.User.First<User>(u => u.Email == LoginCredentials.LoginEmail);
+                var user = _context.User.First<User>(u => u.Email == LoginCredentials.LoginEmail && u.Password == LoginCredentials.LoginPassword);
                 Console.WriteLine(user.Email);
 
                 return RedirectToPage("/Glavna");
