@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Machine_arts.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<MachineArtsContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("MachineArtsContext") ?? throw new InvalidOperationException("Connection string 'MachineArtsContext' not found.")));
 
 var app = builder.Build();
 
