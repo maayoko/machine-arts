@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Machine_arts.Data;
-using Machine_arts.Models;
+using Machine_arts.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +18,16 @@ using (var scope = app.Services.CreateScope())
 
     SeedUsers.Initialize(services);
     SeedGradevinskiStrojevi.Initialize(services);
+    SeedBageri.Initialize(services);
+    SeedBuldozeri.Initialize(services);
+    SeedDemperi.Initialize(services);
+    SeedKiperi.Initialize(services);
+    SeedKombinirke.Initialize(services);
+    SeedKranDizalice.Initialize(services);
+    SeedMikseri.Initialize(services);
+    SeedTegljaci.Initialize(services);
+    SeedUtovarivaci.Initialize(services);
+    SeedValjci.Initialize(services);
 }
 
 

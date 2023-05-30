@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Machine_arts.Data;
+using Machine_arts.Models;
 
-namespace Machine_arts.Models;
+namespace Machine_arts.Seed;
 
 public static class SeedUsers
 {
