@@ -5,49 +5,39 @@ using System.Threading.Tasks;
 using Machine_arts.UtilitiesHelpers;
 using System.Data.OleDb;
 using System.Runtime.Versioning;
+using Machine_arts.Models;
 
 namespace Machine_arts.Pages
 {
     [SupportedOSPlatform("windows")]
     public class PrijavaModel : PageModel
     {
+        private readonly Machine_arts.Data.MachineArtsContext _context;
+
         [BindProperty]
+        public UserLogin LoginCredentials { get; set; } = new UserLogin();
 
-        public InputModel Input { get; set; } = new InputModel();
-
-        public class InputModel
+        public PrijavaModel(Machine_arts.Data.MachineArtsContext context)
         {
-            public string? LoginEmail { get; set; }
-            public string? LoginPassword { get; set; }
+            _context = context;
         }
+
         public void OnGet()
         {
         }
 
         public async Task<IActionResult> OnPostLoginAsync()
         {
-            using (var connection = ConnectionHelper.GetConnection())
-            {
-                connection.Open();
+    
 
-                using (var command = new OleDbCommand("SELECT * FROM Users WHERE Email = ? AND Password = ?", connection))
-                {
-                    command.Parameters.AddWithValue("@Email", Input.LoginEmail);
-                    command.Parameters.AddWithValue("@Password", Input.LoginPassword);
+            try {
+                var user = _context.User.First<User>(u => u.Email == LoginCredentials.LoginEmail);
+                Console.WriteLine(user.Email);
 
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        if (reader.HasRows)
-                        {
-                            return RedirectToPage("/Glavna");
-                        }
-                        else
-                        {
-                        }
-                    }
-                }
+                return RedirectToPage("/Glavna");
+            } catch(Exception e) when (e is ArgumentNullException || e is InvalidOperationException) {
+                return Page();
             }
-            return Page();
         }
     }
 }

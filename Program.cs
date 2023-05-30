@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Machine_arts.Data;
+using Machine_arts.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,14 @@ builder.Services.AddDbContext<MachineArtsContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MachineArtsContext") ?? throw new InvalidOperationException("Connection string 'MachineArtsContext' not found.")));
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

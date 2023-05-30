@@ -14,6 +14,7 @@ namespace Machine_arts.Data
         {
         }
 
-        public DbSet<Machine_arts.Models.UserLogin> UserLogin { get; set; } = default!;
+        public DbSet<UserLogin> UserLogin { get; set; } = default!;
+        public DbSet<User> User { get; set; } = default!;
     }
 }
