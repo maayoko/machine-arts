@@ -28,6 +28,7 @@ using (var scope = app.Services.CreateScope())
     SeedTegljaci.Initialize(services);
     SeedUtovarivaci.Initialize(services);
     SeedValjci.Initialize(services);
+    SeedGradevinskaVozila.Initialize(services);
 }
 
 

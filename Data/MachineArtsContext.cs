@@ -27,5 +27,6 @@ namespace Machine_arts.Data
         public DbSet<Tegljac> Tegljac { get; set; } = default!;
         public DbSet<Utovarivac> Utovarivac { get; set; } = default!;
         public DbSet<Valjak> Valjak { get; set; } = default!;
+        public DbSet<GradevinskoVozilo> GradevinskoVozilo { get; set; } = default!;
     }
 }

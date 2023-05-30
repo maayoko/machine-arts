@@ -5,49 +5,26 @@ using System.Data.OleDb;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using Machine_arts.UtilitiesHelpers;
+using Machine_arts.Models;
 
 namespace Machine_arts.Pages
 {
-    public class Predmet9
-    {
-        public int ID { get; set; }
-        public string Ime { get; set; }
-        public string Slika { get; set; }
-
-        public string Cijena { get; set; }
-        public string Specifikacije { get; set; }
-
-    }
     public class TegljačiModel : PageModel
     {
-        public List<Predmet9> Predmeti { get; set; }
+        public List<Tegljac> Tegljaci { get; set; }
+
+        private readonly Machine_arts.Data.MachineArtsContext _context;
+
+        public TegljačiModel(Machine_arts.Data.MachineArtsContext context)
+        {
+            _context = context;
+        }
+
 
         public async Task OnGetAsync()
         {
-            using (var connection = ConnectionHelper.GetConnection())
-            {
-                await connection.OpenAsync();
-
-                using (var command = new OleDbCommand("SELECT * FROM Tegljaci", connection))
-                {
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        Predmeti = new List<Predmet9>();
-                        while (await reader.ReadAsync())
-                        {
-                            var predmet = new Predmet9
-                            {
-                                ID = reader.GetInt32(0),
-                                Ime = reader.GetString(1),
-                                Slika = reader.GetString(2),
-                                Cijena = reader.GetString(3),
-                                Specifikacije = reader.IsDBNull(4) ? null : reader.GetString(4)
-                            };
-                            Predmeti.Add(predmet);
-                        }
-                    }
-                }
-            }
+            var tegljaci = from g in _context.Tegljac select g;
+            Tegljaci = tegljaci.ToList();
         }
     }
 }
