@@ -1,0 +1,107 @@
+﻿@page
+@model Machine_arts.Pages.BuldozeriModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine arts</title>
+    <link rel="stylesheet" href="/css/Stranice.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/js/Opis.js" defer></script>
+</head>
+<body>
+
+
+    <section class="navbar2">
+        <div clas="navbartop2">
+            <div class="navbar-logo">
+                <a asp-page="Glavna"><img src="/Images/Logo.png" alt="Machine arts Logo" class="logo-img"></a>
+                <a asp-page="Glavna" class="logo-text">Machine Arts</a>
+            </div>
+            <div class="nav-actions">
+                <input type="text" class="search-input" placeholder="Pretraga">
+            </div>
+        </div>
+    </section>
+
+    <nav class="navbar">
+        <div class="navbar-top">
+            <ul class="navbar-menu">
+                <li><h1><a asp-page="Glavna">Građevinski strojevi</a></h1></li>
+                <li><a asp-page="Bageri">Bageri</a></li>
+                <li><a asp-page="Buldozeri" class="active">Buldozeri</a></li>
+                <li><a asp-page="Utovarivači">Utovarivači</a></li>
+                <li><a asp-page="Kombinirke">Kombinirke</a></li>
+                <li><a asp-page="Valjci">Valjci</a></li>
+                <li><a asp-page="Demperi">Demperi</a></li>
+                <li><a asp-page="Kranovidizalice">Kranovi i dizalice</a></li>
+                <li><h1><a asp-page="Građevinskavozila">Građevinska vozila</a></h1></li>
+                <li><a asp-page="Tegljači">Tegljači</a></li>
+                <li><a asp-page="Kiperi">Kiperi</a></li>
+                <li><a asp-page="Mikseri">Mikseri i beton pumpe</a></li>
+            </ul>
+        </div>
+        <div class="navbar-bottom">
+            <a asp-page="Pocetna" class="logout-btn">Odjava</a>
+        </div>
+    </nav>
+
+
+    <div class="content-area">
+
+        <div class="grid-container">
+            @foreach (var predmet in Model.Predmeti)
+            {
+                <div class="grid-item">
+                    <img src="@predmet.Slika"
+                     alt="Slika"
+                     data-naziv="@predmet.Ime"
+                     data-cijena="@String.Format("{0:0.00}€", predmet.Cijena)"
+                     data-opis="@predmet.Specifikacije" />
+
+                    <div class="omjer">
+                        <h2 class="rtext">@predmet.Ime</h2>
+                        <h2 class="ttext">@String.Format("{0:0.00}€", predmet.Cijena)</h2>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+
+    <div id="productOverlay" class="overlay">
+        <section class="navbar2">
+            <div clas="navbartop2">
+                <div class="navbar-logo">
+                    <a asp-page="Glavna"><img src="/Images/Logo.png" alt="Machine arts Logo" class="logo-img"></a>
+                    <a asp-page="Glavna" class="logo-text">Machine Arts</a>
+                </div>
+                <div class="nav-actions">
+                    <input type="text" class="search-input" placeholder="Pretraga">
+                </div>
+            </div>
+        </section>
+        <div class="overlay-content">
+            <div class="left">
+                <div class="ll">
+                    <img id="productImage">
+                </div>
+            </div>
+            <div class="right">
+                <div class="dd">
+                    <h1 id="productName"></h1>
+                    <p id="productPrice"></p>
+                    <p id="productSpecs"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

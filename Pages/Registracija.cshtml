@@ -1,0 +1,52 @@
+﻿@page
+@model Machine_arts.Pages.RegistracijaModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registracija</title>
+    <link rel="stylesheet" href="/css/pr.css">
+</head>
+
+
+<body translate="no" class="align">
+    <div class="grid align__item">
+
+        <div class="register">
+
+            <img src="/Images/Logo.png" class="site__logo" height="20%">
+
+            <h2>Registracija</h2>
+
+            <form action="" method="post" class="form">
+
+                <div class="form__field">
+                    <input asp-for="Input.RegisterUsername" type="text" placeholder="Korisnik">
+                </div>
+
+                <div class="form__field">
+                    <input asp-for="Input.RegisterEmail" type="email" placeholder="info@machinearts.com">
+                    <div data-lastpass-icon-root="true"
+                        style="position: relative !important; height: 0px !important; width: 0px !important; float: left !important;">
+                    </div>
+                </div>
+
+                <div class="form__field">
+                    <input asp-for="Input.RegisterPassword"  type="password" placeholder="••••••••••••">
+                </div>
+
+                <div class="form__field">
+                    <button asp-page-handler="Register" type="submit">Registriraj se</button>
+                </div>
+            </form>
+            <p>Imate korisnički račun? <a asp-page="Prijava">Prijava</a></p>
+        </div>
+    </div>
+
+</body>
+</html>
