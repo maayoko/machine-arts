@@ -16,7 +16,8 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
-    SeedData.Initialize(services);
+    SeedUsers.Initialize(services);
+    SeedGradevinskiStrojevi.Initialize(services);
 }
 
 

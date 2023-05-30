@@ -16,5 +16,6 @@ namespace Machine_arts.Data
 
         public DbSet<UserLogin> UserLogin { get; set; } = default!;
         public DbSet<User> User { get; set; } = default!;
+        public DbSet<GradevinskiStroj> GradevinskiStroj { get; set; } = default!;
     }
 }

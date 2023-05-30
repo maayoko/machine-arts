@@ -3,7 +3,7 @@ using Machine_arts.Data;
 
 namespace Machine_arts.Models;
 
-public static class SeedData
+public static class SeedUsers
 {
     public static void Initialize(IServiceProvider serviceProvider)
     {
