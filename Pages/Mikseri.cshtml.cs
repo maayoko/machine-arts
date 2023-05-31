@@ -5,49 +5,25 @@ using System.Data.OleDb;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using Machine_arts.UtilitiesHelpers;
+using Machine_arts.Models;
 
 namespace Machine_arts.Pages
 {
-    public class Predmet11
-    {
-        public int ID { get; set; }
-        public string Ime { get; set; }
-        public string Slika { get; set; }
-
-        public string Cijena { get; set; }
-        public string Specifikacije { get; set; }
-
-    }
     public class MikseriModel : PageModel
     {
-        public List<Predmet11> Predmeti { get; set; }
+        public List<Mikser> Mikseri { get; set; }
+
+        private readonly Machine_arts.Data.MachineArtsContext _context;
+
+        public MikseriModel(Machine_arts.Data.MachineArtsContext context)
+        {
+            _context = context;
+        }
 
         public async Task OnGetAsync()
         {
-            using (var connection = ConnectionHelper.GetConnection())
-            {
-                await connection.OpenAsync();
-
-                using (var command = new OleDbCommand("SELECT * FROM Mikser", connection))
-                {
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        Predmeti = new List<Predmet11>();
-                        while (await reader.ReadAsync())
-                        {
-                            var predmet = new Predmet11
-                            {
-                                ID = reader.GetInt32(0),
-                                Ime = reader.GetString(1),
-                                Slika = reader.GetString(2),
-                                Cijena = reader.GetString(3),
-                                Specifikacije = reader.IsDBNull(4) ? null : reader.GetString(4)
-                            };
-                            Predmeti.Add(predmet);
-                        }
-                    }
-                }
-            }
+            var mikseri = from g in _context.Mikser select g;
+            Mikseri = mikseri.ToList();
         }
     }
 }

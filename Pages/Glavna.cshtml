@@ -40,7 +40,7 @@
                 <li><a asp-page="Valjci">Valjci</a></li>
                 <li><a asp-page="Demperi">Demperi</a></li>
                 <li><a asp-page="Kranovidizalice">Kranovi i dizalice</a></li>
-                <li><h1><a asp-page="Građevinskavozila">Građevinska vozila</a></h1></li>
+                <li><a asp-page="Građevinskavozila">Građevinska vozila</a></li>
                 <li><a asp-page="Tegljači">Tegljači</a></li>
                 <li><a asp-page="Kiperi">Kiperi</a></li>
                 <li><a asp-page="Mikseri">Mikseri i beton pumpe</a></li>
@@ -55,7 +55,7 @@
     <div class="content-area">
 
         <div class="grid-container">
-            @foreach (var predmet in Model.Predmeti)
+            @foreach (var predmet in Model.GradevinskiStrojevi)
             {
                 <div class="grid-item">
                     <img src="@predmet.Slika"
